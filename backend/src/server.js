@@ -11,6 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 //MIDDLEWARE
+
 app.use(express.json());
 app.use("/admin", adminRoutes);
 app.use("/service", servicesRoutes);

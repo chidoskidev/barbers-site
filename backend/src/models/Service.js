@@ -1,4 +1,4 @@
-import mmongoose from "mongoose";
+import mongoose from "mongoose";
 
 const serviceSchema = new mongoose.Schema(
   {
@@ -11,12 +11,12 @@ const serviceSchema = new mongoose.Schema(
       required: true,
     },
     price: {
-      type: Number,
+      type: String,
       required: true,
     },
     image: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   { timestamps: true },

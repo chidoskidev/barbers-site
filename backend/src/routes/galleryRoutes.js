@@ -4,11 +4,12 @@ import {
   uploadImage,
   deleteImage,
 } from "../controllers/galleryController.js";
+import { verifyToken, isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/", getImages);
-router.post("/", uploadImage);
-router.delete("/:id", deleteImage);
+router.post("/", verifyToken, isAdmin, uploadImage);
+router.delete("/:id", verifyToken, isAdmin, deleteImage);
 
 export default router;

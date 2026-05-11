@@ -5,12 +5,13 @@ import {
   deleteService,
   updateService,
 } from "../controllers/servicesController.js";
+import { verifyToken, isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/", getServices);
-router.post("/", addService);
-router.put("/:id", updateService);
-router.delete("/:id", deleteService);
+router.post("/", verifyToken, isAdmin, addService);
+router.put("/:id", verifyToken, isAdmin, updateService);
+router.delete("/:id", verifyToken, isAdmin, deleteService);
 
 export default router;
