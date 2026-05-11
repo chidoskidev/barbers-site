@@ -49,12 +49,37 @@ export const loginAdmin = async (req, res) => {
     });
   }
 };
-// export const createAdmin = (req, res) => {
-//   // Implementation for creating admin
-// };
-export const updateAdmin = (req, res) => {
-  // Implementation for updating admin
+export const updateMyAdminProfile = async (req, res) => {
+  try {
+
+    const adminId = req.user.id;
+
+    // hash password if being updated
+    if (req.body.password) {
+      req.body.password = await bcrypt.hash(
+        req.body.password,
+        10
+      );
+    }
+
+    const updatedAdmin = await Admin.findByIdAndUpdate(
+      adminId,
+      req.body,
+      {
+        new: true,
+        runValidators: true
+      }
+    );
+
+    res.status(200).json({
+      success: true,
+      admin: updatedAdmin
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
 };
-// export const deleteAdmin = (req, res) => {
-//   // Implementation for deleting admin
-// };
+

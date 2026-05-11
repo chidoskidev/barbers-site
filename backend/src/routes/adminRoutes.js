@@ -1,12 +1,10 @@
 import express from "express";
-import { updateAdmin, loginAdmin } from "../controllers/adminController.js";
-import { verifyToken } from "../middleware/authMiddleware.js";
+import { updateMyAdminProfile, loginAdmin } from "../controllers/adminController.js";
+import { isAdmin, verifyToken } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.post("/login", loginAdmin);
-// router.post("/", createAdmin);
-router.put("/:id", verifyToken, updateAdmin);
-// router.delete("/:id", deleteAdmin);
+router.put("/profile", verifyToken, isAdmin, updateMyAdminProfile);
 
 export default router;
